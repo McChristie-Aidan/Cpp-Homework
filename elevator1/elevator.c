@@ -16,10 +16,10 @@ void main()
 {
     fillArray();
     currentFloor = floorsArray[0];
+    //for (int i = 0; i < 2; i++)
     while (1)
     {
-        checkInput();
-        moveElevator();
+        checkInput();            
     }
 }
 
@@ -29,17 +29,27 @@ void checkInput()
     printf("The top floor is %i. ", sizeof(floorsArray)/sizeof(floorsArray[0]));
     printf("Which floor would you like to go to?\n");
     scanf("%d", &input);
-    
-    if (input == 0 || input > sizeof(floorsArray)/sizeof(floorsArray[0]))
+
+    if (input == 666)
     {
-        printf("Invalid input. Please try again.\n");
+        exit(0);
+    }
+    
+    
+    if (input <= 0 || input > sizeof(floorsArray)/sizeof(floorsArray[0]))
+    {
+        printf("Invalid input. Please try again.\n\n");
         return;
     }
-    else
+    else if (input == currentFloor)
     {
-        printf("Going to floor %d.\n", input);
-        targetFloor = input;
+        printf("We are already on that floor");
+        return;
     }
+
+    targetFloor = input;
+    printf("\nGoing to floor %d.\n", targetFloor);
+    moveElevator();
 }
 
 void moveElevator()
@@ -57,7 +67,8 @@ void moveElevator()
 
         printf("%d\n", currentFloor);  
     }
-    printf("DING! We have arrived.\n");
+
+    printf("DING! We have arrived.\n\n");
 }
 
 void fillArray()
